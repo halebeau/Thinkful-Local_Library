@@ -51,10 +51,23 @@ function getMostPopularBooks(books) {
       }
     }
   return topFive(topBooks);
+}         
+
+function getMostPopularAuthors(books, authors) {
+  const popAuthors = [];
+    for (let author of authors) {
+      const authorName = `${author.name.first} ${author.name.last}`;
+      let count = 0;
+      for (let book of books) {
+        if (author.id === book.authorId) {
+          count += book.borrows.length;
+        }
+      }
+      const authorList = { name: authorName, count: count };
+      popAuthors.push(authorList);
+    }
+  return topFive(popAuthors);
 }
-
-
-function getMostPopularAuthors(books, authors) {}
 
 module.exports = {
   getTotalBooksCount,
