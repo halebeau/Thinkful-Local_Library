@@ -10,10 +10,7 @@ function sortAccountsByLastName(accounts) {
   );
 }
 
-
-
 function getTotalNumberOfBorrows(account, books) {
-
   let result = 0;
   const booksBorrowedByAccount = books.forEach((book) => {
     //loops through the borrows array to check if the accounts ID matches
@@ -31,7 +28,6 @@ function getTotalNumberOfBorrows(account, books) {
 function getBooksPossessedByAccount(account, books, authors) {
 //Creates empty array to be filled with borrowed books
   const borrowedBooks = [];
-
   books.forEach((book) => {
     let bookBorrows = book.borrows;
 
@@ -48,7 +44,6 @@ function getBooksPossessedByAccount(account, books, authors) {
   let result = borrowedBooks.map((book) => {
     return { ...book, author: getAuthor(book, authors) };
   });
-
   return result;
 }
 
