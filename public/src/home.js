@@ -16,7 +16,25 @@ function getBooksBorrowedCount(books) {
   return borrowedBooks.length;
 }
 
-function getMostCommonGenres(books) {}
+function getMostCommonGenres(books) {
+  const commonGenres = [];
+  for (let book of books) {
+    const genre = commonGenres.find(
+      (currentGenre) => currentGenre.name === book.genre);
+    if (genre) {genre.count++;
+    } else {commonGenres.push({ name: book.genre, count: 1})
+  }
+}
+  return topFive(commonGenres);
+}
+
+//Helper function to return the top five results
+function topFive(array) {
+  let result = array.sort((countA, countB) => (
+    countA.count < countB.count ? 1: -1
+  )).slice(0, 5);
+  return result;
+}
 
 function getMostPopularBooks(books) {}
 
