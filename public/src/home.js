@@ -21,8 +21,10 @@ function getMostCommonGenres(books) {
   for (let book of books) {
     const genre = commonGenres.find(
       (currentGenre) => currentGenre.name === book.genre);
-    if (genre) {genre.count++;
-    } else {commonGenres.push({ name: book.genre, count: 1})
+    if (genre) {
+      genre.count++;
+    } else {
+      commonGenres.push({ name: book.genre, count: 1})
   }
 }
   return topFive(commonGenres);
@@ -30,13 +32,27 @@ function getMostCommonGenres(books) {
 
 //Helper function to return the top five results
 function topFive(array) {
-  let result = array.sort((countA, countB) => (
-    countA.count < countB.count ? 1: -1
-  )).slice(0, 5);
+  let result = array.sort((countA, countB) => (countA.count < countB.count ? 1: -1
+    )).slice(0, 5);
   return result;
 }
 
-function getMostPopularBooks(books) {}
+function getMostPopularBooks(books) {
+  const topBooks = [];
+    for (let book of books) {
+      const popular = book.borrows.length
+      const bestBooks = topBooks.find(
+        (popularBook) => popularBook.name === book
+      );
+      if (bestBooks) {
+        bestBooks.count++;
+      } else {
+        topBooks.push({ name: book.title, count: popular});
+      }
+    }
+  return topFive(topBooks);
+}
+
 
 function getMostPopularAuthors(books, authors) {}
 
