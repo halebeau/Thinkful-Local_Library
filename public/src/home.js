@@ -4,15 +4,17 @@ function getTotalBooksCount(books) {
 }
 
 function getTotalAccountsCount(accounts) {
-  
-  const result = accounts.reduce((account) => {
+  const list = accounts.reduce((account) => {
   account = accounts.map((account) => account);
   return account.length;
   }, 0);
-  return result; 
+  return list; 
 }
 
-function getBooksBorrowedCount(books) {}
+function getBooksBorrowedCount(books) {
+  const borrowedBooks = books.filter((book) => book.borrows[0].returned === false);
+  return borrowedBooks.length;
+}
 
 function getMostCommonGenres(books) {}
 
