@@ -1,8 +1,10 @@
+//Returns the number of books in the array
 function getTotalBooksCount(books) {
   const totalBooks = books.map((book) => books); 
   return totalBooks.length
 }
 
+//Returns the number of accounts in the array
 function getTotalAccountsCount(accounts) {
   const list = accounts.reduce((account) => {
   account = accounts.map((account) => account);
@@ -11,11 +13,20 @@ function getTotalAccountsCount(accounts) {
   return list; 
 }
 
+//Returns the number of borrowed books in the array
 function getBooksBorrowedCount(books) {
   const borrowedBooks = books.filter((book) => book.borrows[0].returned === false);
   return borrowedBooks.length;
 }
 
+//Helper function returns top five results
+function _topFive(array) {
+  let result = array.sort((countA, countB) => (countA.count < countB.count ? 1: -1
+    )).slice(0, 5);
+  return result;
+}
+
+//Returns the top five most common Genres
 function getMostCommonGenres(books) {
   const commonGenres = [];
   for (let book of books) {
@@ -27,16 +38,10 @@ function getMostCommonGenres(books) {
       commonGenres.push({ name: book.genre, count: 1})
   }
 }
-  return topFive(commonGenres);
+  return _topFive(commonGenres);
 }
 
-//Helper function to return the top five results
-function topFive(array) {
-  let result = array.sort((countA, countB) => (countA.count < countB.count ? 1: -1
-    )).slice(0, 5);
-  return result;
-}
-
+//Returns the top five most popular Books
 function getMostPopularBooks(books) {
   const topBooks = [];
     for (let book of books) {
@@ -50,9 +55,10 @@ function getMostPopularBooks(books) {
         topBooks.push({ name: book.title, count: popular});
       }
     }
-  return topFive(topBooks);
+  return _topFive(topBooks);
 }         
 
+//Returns the top five most popular Authors
 function getMostPopularAuthors(books, authors) {
   const popAuthors = [];
     for (let author of authors) {
@@ -66,7 +72,7 @@ function getMostPopularAuthors(books, authors) {
       const authorList = { name: authorName, count: count };
       popAuthors.push(authorList);
     }
-  return topFive(popAuthors);
+  return _topFive(popAuthors);
 }
 
 module.exports = {

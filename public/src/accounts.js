@@ -1,8 +1,9 @@
-
+//finds the accounts by the given ID
 function findAccountById(accounts, id) {
   return accounts.find((account) => account.id.includes(id));
 }
 
+//sorts the accounts by last name
 function sortAccountsByLastName(accounts) {
   return accounts.sort((lastA,lastB) => 
     lastA.name.last.toLowerCase() > lastB.name.last.toLowerCase() ? 1 : -1
@@ -23,6 +24,13 @@ function getTotalNumberOfBorrows(account, books) {
   return result;
 }
 
+//Helper function
+//Returns author object
+function _getAuthor(book, authors) {
+  const author = authors.find((author) => author.id === book.authorId);
+  return author;
+}
+
 function getBooksPossessedByAccount(account, books, authors) {
   const borrowedBooks = [];
   books.forEach((book) => {
@@ -34,16 +42,9 @@ function getBooksPossessedByAccount(account, books, authors) {
     });
   });
   let result = borrowedBooks.map((book) => {
-    return { ...book, author: getAuthor(book, authors) };
+    return { ...book, author: _getAuthor(book, authors) };
   });
   return result;
-}
-
-// Helper function
-// Returns author object
-function getAuthor(book, authors) {
-  const author = authors.find((author) => author.id === book.authorId);
-  return author;
 }
 
 module.exports = {
